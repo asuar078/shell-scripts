@@ -65,6 +65,7 @@ if 'VIRTUAL_ENV' in os.environ:
   execfile(activate_this, dict(__file__=activate_this))
 EOF
 
+" syntax corrections
 Plugin 'scrooloose/syntastic'
 
 Plugin 'nvie/vim-flake8'
@@ -75,11 +76,13 @@ syntax on
 Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
 
-
 colorscheme badwolf
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+" start tree with <F2>
+map <F2> :NERDTreeToggle<CR>
 
 Plugin 'kien/ctrlp.vim'
 
@@ -94,6 +97,9 @@ set showmatch
 set hlsearch
 
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+" need to make line appear on single windows
+set laststatus=2
+
 " git wrapper for vim
 Plugin 'tpope/vim-fugitive'
 " easier commiting of code
@@ -111,3 +117,11 @@ nnoremap <leader>u :GundoToggle<CR>
 
 " save session
 nnoremap <leader>s :mksession<CR>
+
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+
