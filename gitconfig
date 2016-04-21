@@ -1,0 +1,12 @@
+[user]
+	name = Arian Ubuntu
+	email = asuar078@fiu.edu
+[alias]
+	hist = log --all --graph --decorate --oneline
+	st = status
+	cma = commmit -am
+	br = branch
+[merge]
+	tool = kdiff3
+[diff]
+	tool = kdiff3
