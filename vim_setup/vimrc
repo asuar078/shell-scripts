@@ -76,7 +76,8 @@ syntax on
 Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
 
-colorscheme badwolf
+" colorscheme badwolf
+colorscheme Monokai-Refined
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -112,6 +113,8 @@ nnoremap <leader><space> :nohlsearch<CR>
 nnoremap j gj
 nnoremap k gk
 
+" visualize your Vim undo tree
+Plugin 'sjl/gundo.vim'
 " toggle gundo
 nnoremap <leader>u :GundoToggle<CR>
 
