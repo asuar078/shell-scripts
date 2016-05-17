@@ -1,5 +1,5 @@
 #!/bin/bash
 
-echo "Grabbing latest vimrc"
+echo "grabbing latest vimrc"
 cp ~/.vimrc ./vimrc
 
