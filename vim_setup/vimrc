@@ -1,3 +1,5 @@
+" $PYTHONPATH='/home/bigbywolf/anaconda3/lib/python3.5/site-packages'
+
 set nocompatible              " required
 filetype off                  " required
 
@@ -26,9 +28,39 @@ set foldlevel=99
 nnoremap <space> za
 
 " paste into vim with ctrl-shift v
-" set paste
+set paste
 
 Plugin 'tmhedberg/SimpylFold'
+
+" Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
+let g:DoxygenToolkit_authorName="Arian Suarez"
+
+" intelligent comments
+set comments=sl:/*,mb:\ *,elx:\ */
+
+"line for marking end recommended end
+set colorcolumn=120
+highlight ColorColumn ctermbg=darkgray
+
+"Filetype detection
+augroup project
+	autocmd!
+    autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
+augroup END
+
+" Setting path variable
+let &path.="src/include,/usr/include/AL,"
+set includeexpr=substitute(v:fname,'\\.','/','g')
+
+au BufNewFile,BufRead *.c
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set smartindent
+    \ set fileformat=unix
 
 au BufNewFile,BufRead *.py
     \ set tabstop=4
@@ -37,6 +69,7 @@ au BufNewFile,BufRead *.py
     \ set textwidth=79
     \ set expandtab
     \ set autoindent
+    \ set smartindent
     \ set fileformat=unix
 
 au BufNewFile,BufRead *.js, *.html, *.css
@@ -52,22 +85,16 @@ set encoding=utf-8
 
 Bundle 'Valloric/YouCompleteMe'
 
+" doesn't seem to work
+Plugin 'rdnetto/YCM-Generator'
+
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-"python with virtualenv support
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
 
 " syntax corrections
 Plugin 'scrooloose/syntastic'
-
+" syntax checking
 Plugin 'nvie/vim-flake8'
 
 let python_highlight_all=1
@@ -76,8 +103,10 @@ syntax on
 Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
 
-" colorscheme badwolf
-colorscheme Monokai-Refined
+colorscheme badwolf
+" colorscheme pychimp
+" colorscheme Monokai-Refined
+" colorscheme kalisi
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -127,4 +156,14 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
+" python with virtualenv support
+" py << EOF
+" import os
+" import sys
+" if 'VIRTUAL_ENV' in os.environ:
+"   project_base_dir = os.environ['VIRTUAL_ENV']
+"   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"   execfile(activate_this, dict(__file__=activate_this))
+" EOF
