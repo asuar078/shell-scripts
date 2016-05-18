@@ -1,10 +1,10 @@
 #!/bin/bash
 
-sudo apt-get install cmake
-sudo apt-get install build-essential cmake
-sudo apt-get install vim
-sudo apt-get install python-dev python3-dev
-sudo apt-get update
+sudo apt-get install cmake -y
+sudo apt-get install build-essential cmake -y
+sudo apt-get install vim-nox -y
+sudo apt-get install python-dev python3-dev -y
+sudo apt-get update -y
 
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
@@ -33,14 +33,14 @@ else
 	mkdir -p ~/.vim/colors
 fi
 
-cp Zenburn-master/colors/zenburn.vim ~/.vim/colors
-cp vim-colors-solarized-master/colors/solarized.vim ~/.vim/colors
-cp badwolf-master/colors/badwolf.vim ~/.vim/colors
-cp badwolf-master/colors/badwolf.vim ~/.vim/colors
-cp vim-monokai-refined-master/colors/Monokai-Refined.vim ~/.vim/colors
+# cp Zenburn-master/colors/zenburn.vim ~/.vim/colors
+# cp vim-colors-solarized-master/colors/solarized.vim ~/.vim/colors
+# cp badwolf-master/colors/badwolf.vim ~/.vim/colors
+# cp badwolf-master/colors/badwolf.vim ~/.vim/colors
+# cp vim-monokai-refined-master/colors/Monokai-Refined.vim ~/.vim/colors
 
-pip install flake8
-pip3 install flake8
+pip install flake8 
+pip3 install flake8 
 
 # install plugins
 vim +PluginInstall +qall
