@@ -1,4 +1,13 @@
+" Shortcuts:
+" F2 - Nerdtree
+" F3 - Toogle indentline
+" F4 - Toogle autoindent for paste
+" F8 - Tablist
+" F10 - Ctags
+
 " $PYTHONPATH='/home/bigbywolf/anaconda3/lib/python3.5/site-packages'
+"configure for 256 color use
+set t_Co=256
 
 set nocompatible              " required
 filetype off                  " required
@@ -15,10 +24,79 @@ Plugin 'gmarik/Vundle.vim'
 
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 
+" code folding
+Plugin 'tmhedberg/SimpylFold'
+" auto indent for python
+Plugin 'vim-scripts/indentpython.vim'
+
+" best autocomplete
+" Bundle 'Valloric/YouCompleteMe'
+
+" Supertab autocomplete
+Plugin 'ervandew/supertab'
+
+" automatic closing of brackets and others
+Plugin 'Raimondi/delimitMate'
+
+" doesn't seem to work
+" Plugin 'rdnetto/YCM-Generator'
+
+" Track the engine.
+" Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+" Plugin 'honza/vim-snippets'
+
+" syntax corrections
+Plugin 'scrooloose/syntastic'
+" syntax checking
+Plugin 'nvie/vim-flake8'
+
+" colorschemes
+" Plugin 'jnurmine/Zenburn'
+" Plugin 'altercation/vim-colors-solarized'
+
+" file explorer
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+" super search with <C-p>
+Plugin 'kien/ctrlp.vim'
+
+" Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+" git wrapper for vim
+Plugin 'tpope/vim-fugitive'
+" easier commiting of code
+Plugin 'tpope/vim-commentary'
+" visualize your Vim undo tree
+Plugin 'sjl/gundo.vim'
+" additional syntax highlighting
+Plugin 'justinmk/vim-syntax-extra'
+
+" show list of all tags
+" Plugin 'vim-scripts/taglist.vim'
+
+" support for c shortcuts
+Plugin 'c.vim'
+" show indentation lines
+Plugin 'yggdroot/indentline'
+
+" better syntax highlighting for c++
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
+" easier ctags handler
+" Plugin 'xolox/vim-easytags'
+" need to run easy-tags
+" Plugin 'xolox/vim-misc'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+filetype plugin on
+filetype on                  " required
 
 " Enable folding
 set foldmethod=indent
@@ -28,9 +106,10 @@ set foldlevel=99
 nnoremap <space> za
 
 " paste into vim with ctrl-shift v
-set paste
+" set paste
 
-Plugin 'tmhedberg/SimpylFold'
+set tags=./tags;/
+map <F10> :!start /min ctags -R .<cr>
 
 " Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
 let g:DoxygenToolkit_authorName="Arian Suarez"
@@ -52,72 +131,96 @@ augroup END
 let &path.="src/include,/usr/include/AL,"
 set includeexpr=substitute(v:fname,'\\.','/','g')
 
-au BufNewFile,BufRead *.c
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set smartindent
-    \ set fileformat=unix
+"Settings
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set autoindent
+set backspace=indent,eol,start
+set background=dark 
+set shiftround
+set ignorecase
+set showmode
+set ruler
+set showcmd
+set mouse=a
 
-au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set smartindent
-    \ set fileformat=unix
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
+" au BufNewFile,BufRead *.c
+"     \ set tabstop=4
+"     \ set softtabstop=4
+"     \ set shiftwidth=4
+"     \ set textwidth=79
+"     \ set expandtab
+"     \ set autoindent
+"     \ set smartindent
+"     \ set fileformat=unix
 
-Plugin 'vim-scripts/indentpython.vim'
+" au BufNewFile,BufRead *.py
+"     \ set tabstop=4
+"     \ set softtabstop=4
+"     \ set shiftwidth=4
+"     \ set textwidth=79
+"     \ set expandtab
+"     \ set autoindent
+"     \ set smartindent
+"     \ set fileformat=unix
+
+" au BufNewFile,BufRead *.js, *.html, *.css
+"     \ set tabstop=2
+"     \ set softtabstop=2
+"     \ set shiftwidth=2
+"     \ set expandtab
+"     \ set autoindent
+"     \ set smartindent
+"     \ set fileformat=unix
+
+" au BufNewFile,BufRead *.html
+"     \ set tabstop=2
+"     \ set softtabstop=2
+"     \ set shiftwidth=2
+
+" set tabstop=4
+" set softtabstop=4
+" set shiftwidth=4
+" set expandtab
 
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 set encoding=utf-8
 
-Bundle 'Valloric/YouCompleteMe'
+" let g:ycm_autoclose_preview_window_after_completion=1
+" let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+" map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-" doesn't seem to work
-Plugin 'rdnetto/YCM-Generator'
-
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-
-" syntax corrections
-Plugin 'scrooloose/syntastic'
-" syntax checking
-Plugin 'nvie/vim-flake8'
+let g:indentLine_char = '.'
+map <F3> :IndentLinesToggle<CR>
 
 let python_highlight_all=1
 syntax on
 
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
-
-colorscheme badwolf
+"colorscheme badwolf
 " colorscheme pychimp
 " colorscheme Monokai-Refined
 " colorscheme kalisi
+colorscheme molokai
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 " start tree with <F2>
 map <F2> :NERDTreeToggle<CR>
 
-Plugin 'kien/ctrlp.vim'
+" toggle autoindent for pasting content
+nnoremap <F4> :set invpaste paste?<CR>
+set pastetoggle=<F4>
+set showmode
+
+" toggle tag list
+" nnoremap <silent> <F8> :TlistToggle<CR>
 
 set number
-
 set showcmd
 set cursorline
 set showmatch
@@ -126,14 +229,8 @@ set showmatch
 " highlight search
 set hlsearch
 
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 " need to make line appear on single windows
 set laststatus=2
-
-" git wrapper for vim
-Plugin 'tpope/vim-fugitive'
-" easier commiting of code
-Plugin 'tpope/vim-commentary'
 
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
@@ -142,8 +239,6 @@ nnoremap <leader><space> :nohlsearch<CR>
 nnoremap j gj
 nnoremap k gk
 
-" visualize your Vim undo tree
-Plugin 'sjl/gundo.vim'
 " toggle gundo
 nnoremap <leader>u :GundoToggle<CR>
 
@@ -156,7 +251,15 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+" Syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
 " python with virtualenv support
 " py << EOF
@@ -167,3 +270,10 @@ nnoremap <C-H> <C-W><C-H>
 "   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
 "   execfile(activate_this, dict(__file__=activate_this))
 " EOF
+
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+let g:SuperTabDefaultCompletionType = "context"
+
