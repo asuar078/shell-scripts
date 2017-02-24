@@ -95,9 +95,9 @@ Plugin 'dracula/vim'
 Plugin 'rip-rip/clang_complete'
 
 
-" easier ctags handler
+" " easier ctags handler
 " Plugin 'xolox/vim-easytags'
-" need to run easy-tags
+" " need to run easy-tags
 " Plugin 'xolox/vim-misc'
 
 " All of your Plugins must be added before the following line
@@ -118,7 +118,7 @@ nnoremap <space> za
 
 set tags=./tags;/
 set tags+=~/.vim/tags/stdtags,tags,.tags,../tags
-
+set tags+=/home/bigbywolf/Workspace/Embedded/tivaware/tags
 
 map <F5> :!start /min ctags -R .<cr>
 
@@ -165,46 +165,6 @@ set mouse=a
 set mousefocus " No keypressing -- focus-follows-mouse for gvim, in _gvimrc
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-" au BufNewFile,BufRead *.c
-"     \ set tabstop=4
-"     \ set softtabstop=4
-"     \ set shiftwidth=4
-"     \ set textwidth=79
-"     \ set expandtab
-"     \ set autoindent
-"     \ set smartindent
-"     \ set fileformat=unix
-
-" au BufNewFile,BufRead *.py
-"     \ set tabstop=4
-"     \ set softtabstop=4
-"     \ set shiftwidth=4
-"     \ set textwidth=79
-"     \ set expandtab
-"     \ set autoindent
-"     \ set smartindent
-"     \ set fileformat=unix
-
-" au BufNewFile,BufRead *.js, *.html, *.css
-"     \ set tabstop=2
-"     \ set softtabstop=2
-"     \ set shiftwidth=2
-"     \ set expandtab
-"     \ set autoindent
-"     \ set smartindent
-"     \ set fileformat=unix
-
-" au BufNewFile,BufRead *.html
-"     \ set tabstop=2
-"     \ set softtabstop=2
-"     \ set shiftwidth=2
-
-" set tabstop=4
-" set softtabstop=4
-" set shiftwidth=4
-" set expandtab
-
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 set encoding=utf-8
@@ -292,10 +252,16 @@ set statusline+=%*
 nnoremap H ^ 
 nnoremap L $
 
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
+" return to normal mode 
+inoremap ;; <Esc>
+
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_c_include_dirs = [ 'includes', 'headers', '/home/bigbywolf/Workspace/Embedded/tivaware' ]
 
 " python with virtualenv support
 " py << EOF
